@@ -45,7 +45,7 @@ if (check_auth()) {
             <li style="margin-left: auto;">
                 <?php if (isset($_SESSION['user_id'])) : ?>
                     <a href="profile.php"><img width="35" height="35" src="<?= $user['img_src']?>"
-                                               alt="Профиль"></a></li>
+                                               alt="Профиль"><?= $user['register']?></a></li>
                 <li><a href="logout.php">Выход</a></li>
                 <?php else : ?>
                     <a href="profile.php">Вход/Регистрация</a>

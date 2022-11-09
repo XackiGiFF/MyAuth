@@ -7,7 +7,7 @@ $stmt = pdo()->prepare("SELECT * FROM `users` WHERE `login` = :login");
 $stmt->execute(['login' => $_POST['login']]);
 if ($stmt->rowCount() > 0) {
     flash('Это имя пользователя уже занято.');
-    header('Location: /'); // Возврат на форму регистрации
+    header('Location: register.php'); // Возврат на форму регистрации
     die; // Остановка выполнения скрипта
 }
 
@@ -24,4 +24,4 @@ $stmt->execute([
     'gender' => $gender,
 ]);
 
-header('Location: login.php');
+header('Location: profile.php');

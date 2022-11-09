@@ -1,10 +1,10 @@
 <?php
 
-require_once __DIR__.'/boot.php';
+require_once __DIR__.'/application/boot.php';
 
 // проверяем наличие пользователя с указанным юзернеймом
-$stmt = pdo()->prepare("SELECT * FROM `users` WHERE `username` = :username");
-$stmt->execute(['username' => $_POST['username']]);
+$stmt = pdo()->prepare("SELECT * FROM `users` WHERE `login` = :login");
+$stmt->execute(['login' => $_POST['login']]);
 if (!$stmt->rowCount()) {
     flash('Пользователь с такими данными не зарегистрирован');
     header('Location: login.php');
@@ -19,9 +19,9 @@ if (password_verify($_POST['password'], $user['password'])) {
     // Например, если вы поменяете опции хеширования
     if (password_needs_rehash($user['password'], PASSWORD_DEFAULT)) {
         $newHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $stmt = pdo()->prepare('UPDATE `users` SET `password` = :password WHERE `username` = :username');
+        $stmt = pdo()->prepare('UPDATE `users` SET `password` = :password WHERE `login` = :login');
         $stmt->execute([
-            'username' => $_POST['username'],
+            'login' => $_POST['login'],
             'password' => $newHash,
         ]);
     }

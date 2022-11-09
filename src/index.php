@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.'/boot.php';
+require_once __DIR__.'/application/boot.php';
 
 $user = null;
 
@@ -10,31 +10,141 @@ if (check_auth()) {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 ?>
-<?php if ($user) { ?>
 
-    <h1>Добро пожаловать, <?=htmlspecialchars($user['username'])?>!</h1>
-    <?php echo base64_decode("PGgyPtCh0LvQtdC00YPRjtGJ0LXQtSDQt9Cw0LTQsNC90LjQtSAtINGB0L7Qt9C00LDRgtGMINGH0LDRgiwg0LjRgdC/0L7Qu9GM0LfRg9GPINC40LzQtdC90LAg0L/QvtC70YzQt9C+0LLQsNGC0LXQu9C10LkuINCl0YDQsNC90LjRgtGMINGB0L7QvtCx0YnQtdC90LjRjyDQvdC10L7QsdGF0L7QtNC40LzQviDQsiDQsdCw0LfQtSDQtNCw0L3QvdGL0YUuPC9oMj4="); ?>
-    <form class="mt-5" method="post" action="do_logout.php">
-        <button type="submit" class="btn btn-primary">Выйти</button>
-    </form>
+<!DOCTYPE html>
+<html lang="ru">
 
-<?php } else { ?>
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Гостиница</title>
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Open+Sans:wght@300&display=swap"
+      rel="stylesheet">
+   <link rel="stylesheet" href="css/main.css">
+</head>
 
-    <h1 class="mb-5">Регистрация</h1>
+<body>
+   <header class="header">
+      <p class="title">
+         "Гостиница Larufo"
+         <br>Для вас только комфорт и удобство<br>
+      </p>
 
-    <?php flash(); ?>
+      <nav>
+        <ul>
+            <li><a href="index.php">Главная</a></li>
+            <li><a href="numbers.php">Номера</a></li>
+            <li><a href="about_us.php">О нас</a></li>
+            <li><a href="contacts.php">Контакты</a></li>
+            <li style="margin-left: auto;">
+                <?php if (isset($_SESSION['user_id'])) : ?>
+                    <a href="profile.php"><img width="35" height="35" src="<?= $user['img_src']?>"
+                                               alt="Профиль"></a></li>
+                <li><a href="logout.php">Выход</a></li>
+                <?php else : ?>
+                    <a href="profile.php">Вход/Регистрация</a>
+                <?php endif; ?>
+            </li>
+        </ul>
+    </nav>
 
-    <form method="post" action="do_register.php">
-  <div class="mb-3">
-    <label for="username" class="form-label">Username</label>
-    <input type="text" class="form-control" id="username" name="username" required>
-  </div>
-  <div class="mb-3">
-    <label for="password" class="form-label">Password</label>
-    <input type="password" class="form-control" id="password" name="password" required>
-  </div>
-  <button type="submit" class="btn btn-primary">Register</button>
-  <a class="btn btn-outline-primary" href="login.php">Login</a>
-</form>
+   </header>
+   <section class="updates">
+      <h1 class="headlines">
+         Акции
+      </h1>
+      <ul class="list">
+         <li class="item">
+            <img class="line" src="img/line1.png" alt="Обводка">
+            <p class="img_title">Последний день скидок</p>
+            <img class="face" src="img/number1.png" alt="книжка">
+            <p class="name">Двухместный номер (24ч)</p>
+            <span class="price">$18.99</span>
+         </li>
+         <li class="item">
+            <img class="line" src="img/line1.png" alt="Обводка">
+            <p class="img_title">Последний день скидок</p>
+            <img class="face" src="img/number2.png" alt="книжка">
+            <p class="name">Двухместный номер (24ч)</p>
+            <span class="price">$18.99</span>
+         </li>
+      </ul>
+      <div class="square"></div>
+   </section>
+   <section class="video">
+      <div class="video_container">
+         <h2 class="history">
+            Мы вживую
+         </h2>
+         <p class="opisanie">
+            В этом видео Вы сможете ознакомиться с<br>
+            атмосферой и прекрасными видами нашей гостиницы.<br>
+            Просто кликните на «Play»!
+         </p>
+         <iframe width="560" height="315" src="https://www.youtube.com/embed/5WRmcMjGdGU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+         <!-- <div class="a"></div> -->
+         <a class="button" href="#">Читать больше</a>
+         <img class="line2" src="img/line3.png" alt="">
+      </div>
+   </section>
+   <section class="reveiw">
+      <h2> Отзывы </h2>
+      <div class="container">
+         <div class="reveiw_container">
+            <img class="comma" src="img/virgule.png" alt="Запятая">
+            <p>Очень приятно провела время,<br>
+               Персонал превосходно выполнил<br>
+               свою работу</p>
+            <p class="reveiw_p">
+               Арина Мещенко
+                </p>
+         </div>
+         <div class="reveiw_container">
+            <img class="comma" src="img/virgule.png" alt="Запятая">
+            <p>Скажем «Нет!» клишированности и<br>
+               банальности. Хорошее обслуживание,<br>
+               классные цены, в целом<br>
+               пять из пяти. </p>
+            <p class="reveiw_p">
+               Кирилл Головкин
+            </p>
+         </div>
+         <div class="reveiw_container">
+            <img class="comma" src="img/virgule.png" alt="Запятая">
+            <p>Удивлена, насколько хорошо<br>
+               получилось взять номер,<br>
+               Спасибо сотрудникам. <br>
+               В номере чисто и опрятно!</p>
+            <p class="reveiw_p">
+              Мира Петрова
+            </p>
+         </div>
+      </div>
+   </section>
+   <footer>
+      <div class="container7">
+         <h3>
+            Подпишитесь на рассылку
+         </h3>
+         <form action="#">
+            <input class="imput" type="text" placeholder="Введите свой email">
+            <button class="telegram" type="submit"> Отправить
+            </button>
+         </form>
+      </div>
+      <div class="icons_container">
+      <img src="/img/youtube.png" alt="">
+      <img src="/img/facebook.png" alt="">
+      <img src="/img/twitter.png" alt="">
+      <img src="/img/instagram.png" alt="">
+      </div>
+   </footer>
 
-<?php } ?>
+</body>
+
+</html>

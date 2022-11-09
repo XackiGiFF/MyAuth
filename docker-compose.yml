@@ -20,14 +20,14 @@ services:
     image: mariadb:10.3.23
     volumes:
       - ./mariadb:/var/lib/mysql
-      - ./sql/sait.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+      - ./sql/app_db.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
     ports:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: dLdowq3JiC18X
-      MYSQL_DATABASE: php-auth-demo
+      MYSQL_DATABASE: app_db
       MYSQL_USER: mysql
-      MYSQL_PASSWORD: dLdowq3Ji
+      MYSQL_PASSWORD: mysql
   phpmyadmin:
     container_name: PYPMYADMIN
     image: phpmyadmin/phpmyadmin

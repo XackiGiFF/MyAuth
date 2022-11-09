@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `additional_services` (
   `id` int NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `cost` int NOT NULL
 );
 
@@ -43,7 +43,7 @@ INSERT INTO `additional_services` (`id`, `name`, `cost`) VALUES
 
 CREATE TABLE `category` (
   `id` int NOT NULL,
-  `name` varchar(50) NOT NULL
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
 );
 
 --
@@ -140,7 +140,7 @@ INSERT INTO `rooms` (`id`, `number`, `category_id`, `cost_per_day`) VALUES
 
 CREATE TABLE `users` (
   `id` int NOT NULL,
-  `fio` varchar(255) NOT NULL,
+  `fio` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `login` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `birthday` date NOT NULL,
